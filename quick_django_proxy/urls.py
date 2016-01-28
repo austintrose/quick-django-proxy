@@ -8,7 +8,7 @@ def proxy_img_view(url):
     def view(request):
         request = urllib2.Request(url)
         response = urllib2.urlopen(request)
-        return HttpResponse(response.read())
+        return HttpResponse(response.read(), content_type="image/png")
     return view
 
 def google(request):
