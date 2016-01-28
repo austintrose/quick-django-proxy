@@ -1,30 +1,41 @@
-"""django_eb URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.9/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
 from django.conf.urls import url
 from django.contrib import admin
 
 from django.http import HttpResponse
 import urllib2
 
-def fb_proxy(request):
-    request = urllib2.Request('http://www.facebook.com')
-    response = urllib2.urlopen(request)
-    return HttpResponse(response.read())
+def proxy_img_view(url):
+    def view(request):
+        request = urllib2.Request(url)
+        response = urllib2.urlopen(request)
+        return HttpResponse(response.read())
+    return view
+
+def google(request):
+    view = proxy_img_view('http://www.google.com/images/nav_logo242_hr.png')
+    return view(request)
+
+def facebook(request):
+    view = proxy_img_view('http://static.xx.fbcdn.net/rsrc.php/v2/y1/r/wbGFLRt-sam.png')
+    return view(request)
+
+def amazon(request):
+    view = proxy_img_view('http://g-ecx.images-amazon.com/images/G/01/AUIClients/AmazonUIBaseCSS-sprite_2x-226eca6867acbf88de65f69383ea33c9a02ffc17._V2_.png')
+    return view(request)
+
+def wikipedia(request):
+    view = proxy_img_view('http://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2_2x.png')
+    return view(request)
+
+def twitter(request):
+    view = proxy_img_view('http://abs.twimg.com/a/1453865360/img/t1/lohp_streams_header_bg_v4.png')
+    return view(request)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^fb/', fb_proxy),
+    url(r'^google/', google),
+    url(r'^facebook/', facebook),
+    url(r'^amazon/', amazon),
+    url(r'^wikipedia/', wikipedia),
+    url(r'^twitter/', twitter),
 ]
