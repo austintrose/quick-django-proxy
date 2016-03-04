@@ -1,5 +1,5 @@
-sudo apt-get install -y git;
-sudo apt-get install -y python-pip;
+sudo apt-get install -qq git;
+sudo apt-get install -qq python-pip;
 sudo pip install virtualenv;
 sudo pip install django;
 git clone https://github.com/austintrose/quick-django-proxy.git;
