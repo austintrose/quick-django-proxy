@@ -24,7 +24,7 @@ def amazon(request):
     return view(request)
 
 def wikipedia(request):
-    view = proxy_img_view('http://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2_2x.png')
+    view = proxy_img_view('https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2@2x.png')
     return view(request)
 
 def twitter(request):
